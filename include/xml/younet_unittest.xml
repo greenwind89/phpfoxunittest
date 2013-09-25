@@ -1,0 +1,24 @@
+<product>
+	<data>
+		<product_id>younet_unittest</product_id>
+		<is_core>0</is_core>
+		<title>YouNet Unittest</title>
+		<description>by YouNet Company</description>
+		<version>3.01</version>
+		<latest_version></latest_version>
+		<last_check>1378810640</last_check>
+		<is_active>1</is_active>
+		<url>http://phpfox3.demo.younetco.com/</url>
+		<url_version_check>http://phpfox3.demo.younetco.com/</url_version_check>
+	</data>
+	<installs>
+		<install>
+			<version>3.01</version>
+			<install_code><![CDATA[include (PHPFOX_DIR_MODULE . 'unittest/yninstall/versions/v3.01.php');]]></install_code>
+			<uninstall_code><![CDATA[include (PHPFOX_DIR_MODULE . 'unittest/yninstall/uninstall.php');]]></uninstall_code>
+		</install>
+	</installs>
+	<modules>
+		<module_id>unittest</module_id>
+	</modules>
+</product>

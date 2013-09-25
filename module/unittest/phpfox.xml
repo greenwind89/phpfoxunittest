@@ -1,0 +1,14 @@
+<module>
+	<data>
+		<module_id>unittest</module_id>
+		<product_id>younet_unittest</product_id>
+		<is_core>0</is_core>
+		<is_active>1</is_active>
+		<is_menu>1</is_menu>
+		<menu />
+		<phrase_var_name>module_unittest</phrase_var_name>
+	</data>
+	<settings>
+		<setting group="" module_id="unittest" is_hidden="0" type="" var_name="" phrase_var_name="" ordering="0" version_id=""></setting>
+	</settings>
+</module>

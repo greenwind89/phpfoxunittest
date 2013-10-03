@@ -7,7 +7,7 @@
  * @copyright		[YOUNET_COPYRIGHT]
  * @author  		minhTA	
  */
-class Socialad_Test extends PHPUnit_Framework_TestCase {
+class Socialad_Create_Edit_Ad_Test extends PHPUnit_Framework_TestCase {
 
 	public function __constructor($name) {
 		parent::__constructor($name);
@@ -17,12 +17,10 @@ class Socialad_Test extends PHPUnit_Framework_TestCase {
 		Phpfox::getService('unittest.test.socialad')->truncateAllRelatedTables();
 	}
 
-	public function test1() {
-		$this->assertEquals(1, 1);
-	}	
 
 	public function tearDown()
 	{
+		Phpfox::getService('unittest.test.socialad')->truncateAllRelatedTables();
 	}
 
 }

@@ -70,7 +70,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
-		$iModuleId = 1;
+		$iModuleId = null;
 		$aQuery = array(
 			'user_id' => $iUserId,
 			'block_id' => $iBlockId,
@@ -111,7 +111,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
-		$iModuleId = 1;
+		$iModuleId = null;
 		$aQuery = array(
 			'user_id' => $iUserId,
 			'block_id' => $iBlockId,
@@ -148,7 +148,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
-		$iModuleId = 1;
+		$iModuleId = null;
 		$aQuery = array(
 			'user_id' => $iUserId,
 			'block_id' => $iBlockId,
@@ -185,7 +185,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
-		$iModuleId = 1;
+		$iModuleId = null;
 		$aQuery = array(
 			'user_id' => $iUserId,
 			'block_id' => $iBlockId,
@@ -224,7 +224,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
-		$iModuleId = 1;
+		$iModuleId = null;
 		$aQuery = array(
 			'user_id' => $iUserId,
 			'block_id' => $iBlockId,
@@ -264,7 +264,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
-		$iModuleId = 1;
+		$iModuleId = null;
 		$aQuery = array(
 			'user_id' => $iUserId,
 			'block_id' => $iBlockId,
@@ -303,7 +303,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
-		$iModuleId = 1;
+		$iModuleId = null;
 		$aQuery = array(
 			'user_id' => $iUserId,
 			'block_id' => $iBlockId,
@@ -342,7 +342,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
-		$iModuleId = 1;
+		$iModuleId = null;
 		$aQuery = array(
 			'user_id' => $iUserId,
 			'block_id' => $iBlockId,
@@ -378,7 +378,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
-		$iModuleId = 1;
+		$iModuleId = null;
 		$aQuery = array(
 			'user_id' => $iUserId,
 			'block_id' => $iBlockId,
@@ -416,7 +416,88 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
-		$iModuleId = 1;
+		$iModuleId = null;
+		$aQuery = array(
+			'user_id' => $iUserId,
+			'block_id' => $iBlockId,
+			'module_id' => $iModuleId
+		);
+		$actual = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testGetAdsToDisplayOnBlockByUsergroup() {
+		// now is 2003 
+		$aVals = array( 
+			'user_group_id' => 3,
+			'birth_day' => 12,
+			'birth_month' => 2,
+			'birth_year' => 1995, // 23
+			'country_iso' => 'FR',
+			'language_id' => 'en', 
+			'gender' => 1 // no gender 
+		);
+
+		Phpfox::getService('unittest.test.socialad')->insertTestUser($aVals);
+		// test with user gender equal 0
+		$aAdVals = array(
+			'ad_id' => 1989,
+			'language' => array( 'en', 'vn'),
+			'user_group' => array(
+				3,4
+			)
+
+		);
+		//to remove ads at tear off
+		Phpfox::getService('unittest.test.socialad')->insertTestAd($aAdVals);
+
+		$expected = array(
+			$aAdVals['ad_id']
+		);
+
+		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
+		$iBlockId = 3;
+		$iModuleId = null;
+		$aQuery = array(
+			'user_id' => $iUserId,
+			'block_id' => $iBlockId,
+			'module_id' => $iModuleId
+		);
+		$actual = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testGetAdsToDisplayOnBlockByNotInUsergroup() {
+		// now is 2003 
+		$aVals = array( 
+			'user_group_id' => 5,
+			'birth_day' => 12,
+			'birth_month' => 2,
+			'birth_year' => 1995, // 23
+			'country_iso' => 'FR',
+			'language_id' => 'en', 
+			'gender' => 1 // no gender 
+		);
+
+		Phpfox::getService('unittest.test.socialad')->insertTestUser($aVals);
+		// test with user gender equal 0
+		$aAdVals = array(
+			'ad_id' => 1989,
+			'language' => array( 'en', 'vn'),
+			'user_group' => array(
+				3,4
+			)
+
+		);
+		//to remove ads at tear off
+		Phpfox::getService('unittest.test.socialad')->insertTestAd($aAdVals);
+
+		$expected = array(
+		);
+
+		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
+		$iBlockId = 3;
+		$iModuleId = null;
 		$aQuery = array(
 			'user_id' => $iUserId,
 			'block_id' => $iBlockId,

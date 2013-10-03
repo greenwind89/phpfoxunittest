@@ -6,6 +6,12 @@ require_once "PHPUnit/TextUI/TestRunner.php";
 require_once "PHPUnit/Framework/TestSuite.php";                                                                                         
 require_once "socialad_testcase.php";
 require_once "socialad_audience_test.php";
+require_once "socialad_placement_test.php";
+require_once "socialad_package_test.php";
+require_once "socialad_create_edit_ad_test.php";
+require_once "socialad_payment_test.php";
+require_once "socialad_helper_test.php";
+
 class Unittest_Service_Test_SocialAd_SocialAd extends Phpfox_Service {
 
 	private $_aTestSuites;
@@ -21,10 +27,50 @@ class Unittest_Service_Test_SocialAd_SocialAd extends Phpfox_Service {
 				 'id' => 'socialad_audience_test',
 				 'description' => 'Test Audience Of Ads'
 			 ), 
+			 array( 
+				 'id' => 'socialad_placement_test',
+				 'description' => 'Test Placement Of Ads'
+			 ), 
+			 array( 
+				 'id' => 'socialad_package_test',
+				 'description' => 'Test Creating Packages'
+			 ), 
+			 array( 
+				 'id' => 'socialad_create_edit_ad_test',
+				 'description' => 'Test create edit ad '
+			 ), 
+			 array( 
+				 'id' => 'socialad_payment_test',
+				 'description' => 'Test payment gateway and services'
+			 ), 
+			 array( 
+				 'id' => 'socialad_helper_test',
+				 'description' => 'Test Helper functions'
+			 ), 
+
 
 		 );
 	}
+
 	public function generateTestData() {
+
+	}
+
+	public function truncateAllRelatedTables () {
+		// TRUNCATE related tables 
+		$aTable = array(
+			Phpfox::getT('socialad_ad'),
+			Phpfox::getT('socialad_image'),
+			Phpfox::getT('socialad_ad_audience_user_group'),
+			Phpfox::getT('socialad_ad_audience_location'),
+			Phpfox::getT('socialad_ad_audience_language'),
+			Phpfox::getT('socialad_transaction'),
+			Phpfox::getT('socialad_package')
+		);
+
+		foreach($aTable as $sTable) {
+			Phpfox::getService('unittest.db')->truncateTable($sTable);
+		}
 
 	}
 
@@ -142,15 +188,41 @@ class Unittest_Service_Test_SocialAd_SocialAd extends Phpfox_Service {
 			unset($aVals['language']);
 		}
 
+		if(isset($aVals['user_group'])) {
+			foreach($aVals['user_group'] as $iUserGroupId) {
+				$aUsergroupInsert = array( 
+					'ad_id' => $aVals['ad_id'],
+					'user_group_id' => $iUserGroupId
+				);
+
+				$this->database()->insert(Phpfox::getT('socialad_ad_audience_user_group'), $aUsergroupInsert);
+			}
+			unset($aVals['user_group']);
+		}
+
+		if(isset($aVals['module'])) {
+			foreach($aVals['module'] as $sModuleId) {
+				$aModuleInsert = array( 
+					'ad_id' => $aVals['ad_id'],
+					'module_id' => $sModuleId
+				);
+
+				$this->database()->insert(Phpfox::getT('socialad_ad_placement_module'), $aModuleInsert);
+			}
+			unset($aVals['module']);
+		}
 		$aInsert = array_merge(array(
 			'ad_title' => 'Test ad title ' ,
 			'ad_text' => ' test text',
 			'audience_age_min' => 0,
 			'audience_gender' => 0,
 			'audience_age_max' => 10000,
+			'placement_block_id' => 3,
 		), $aVals);
 
-		$this->database()->insert(Phpfox::getT('socialad_ad'), $aInsert);
+		$iAdId = $this->database()->insert(Phpfox::getT('socialad_ad'), $aInsert);
+
+		return $iAdId;
 	}
 
 	public function removeAd($iAdId) {

@@ -64,9 +64,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 		//to remove ads at tear off
 		Phpfox::getService('unittest.test.socialad')->insertTestAd($aAdVals);
 
-		$expected = array(
-			$aAdVals['ad_id']
-		);
+		$expected = $aAdVals['ad_id'];
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
@@ -76,9 +74,10 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 			'block_id' => $iBlockId,
 			'module_id' => $iModuleId
 		);
-		$actual = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
-		$this->assertEquals($expected, $actual);
+		$aAds = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$actual = count($aAds) > 0 ? $aAds[0]['ad_id'] : false;
 
+		$this->assertEquals($expected, $actual);
 	}
 
 	public function testGetAdsToDisplayOnBlockByGenderAny() {
@@ -105,9 +104,8 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 		//to remove ads at tear off
 		Phpfox::getService('unittest.test.socialad')->insertTestAd($aAdVals);
 
-		$expected = array(
-			$aAdVals['ad_id']
-		);
+		$expected = $aAdVals['ad_id'];
+		
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
@@ -117,7 +115,9 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 			'block_id' => $iBlockId,
 			'module_id' => $iModuleId
 		);
-		$actual = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$aAds = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$actual = count($aAds) > 0 ? $aAds[0]['ad_id'] : false;
+
 		$this->assertEquals($expected, $actual);
 	}
 
@@ -142,9 +142,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 		//to remove ads at tear off
 		Phpfox::getService('unittest.test.socialad')->insertTestAd($aAdVals);
 
-		$expected = array(
-			1989
-		);
+		$expected =  1989;
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
@@ -154,7 +152,9 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 			'block_id' => $iBlockId,
 			'module_id' => $iModuleId
 		);
-		$actual = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$aAds = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$actual = count($aAds) > 0 ? $aAds[0]['ad_id'] : false;
+
 		$this->assertEquals($expected, $actual);
 	}
 
@@ -179,9 +179,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 		//to remove ads at tear off
 		Phpfox::getService('unittest.test.socialad')->insertTestAd($aAdVals);
 
-		$expected = array(
-			
-		);
+		$expected = false;
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
@@ -191,7 +189,9 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 			'block_id' => $iBlockId,
 			'module_id' => $iModuleId
 		);
-		$actual = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$aAds = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$actual = count($aAds) > 0 ? $aAds[0]['ad_id'] : false;
+
 		$this->assertEquals($expected, $actual);
 	}
 
@@ -218,9 +218,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 		//to remove ads at tear off
 		Phpfox::getService('unittest.test.socialad')->insertTestAd($aAdVals);
 
-		$expected = array(
-			$aAdVals['ad_id']
-		);
+		$expected = $aAdVals['ad_id'] ;
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
@@ -230,7 +228,9 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 			'block_id' => $iBlockId,
 			'module_id' => $iModuleId
 		);
-		$actual = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$aAds = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$actual = count($aAds) > 0 ? $aAds[0]['ad_id'] : false;
+
 		$this->assertEquals($expected, $actual);
 	}
 
@@ -296,10 +296,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 		//to remove ads at tear off
 		Phpfox::getService('unittest.test.socialad')->insertTestAd($aAdVals);
 
-		$expected = array(
-			1989
-			
-		);
+		$expected = 1989 ;
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
@@ -309,7 +306,9 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 			'block_id' => $iBlockId,
 			'module_id' => $iModuleId
 		);
-		$actual = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$aAds = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$actual = count($aAds) > 0 ? $aAds[0]['ad_id'] : false;
+
 		$this->assertEquals($expected, $actual);
 	}
 
@@ -335,10 +334,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 		//to remove ads at tear off
 		Phpfox::getService('unittest.test.socialad')->insertTestAd($aAdVals);
 
-		$expected = array(
-			1989
-			
-		);
+		$expected = 1989;
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
@@ -348,7 +344,9 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 			'block_id' => $iBlockId,
 			'module_id' => $iModuleId
 		);
-		$actual = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$aAds = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$actual = count($aAds) > 0 ? $aAds[0]['ad_id'] : false;
+
 		$this->assertEquals($expected, $actual);
 	}
 
@@ -410,9 +408,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 		//to remove ads at tear off
 		Phpfox::getService('unittest.test.socialad')->insertTestAd($aAdVals);
 
-		$expected = array(
-			$aAdVals['ad_id']
-		);
+		$expected = $aAdVals['ad_id'];
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
@@ -422,7 +418,9 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 			'block_id' => $iBlockId,
 			'module_id' => $iModuleId
 		);
-		$actual = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$aAds = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$actual = count($aAds) > 0 ? $aAds[0]['ad_id'] : false;
+
 		$this->assertEquals($expected, $actual);
 	}
 
@@ -451,9 +449,7 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 		//to remove ads at tear off
 		Phpfox::getService('unittest.test.socialad')->insertTestAd($aAdVals);
 
-		$expected = array(
-			$aAdVals['ad_id']
-		);
+		$expected = $aAdVals['ad_id'];
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 3;
@@ -463,7 +459,9 @@ class Socialad_Audience_Test extends PHPUnit_Framework_TestCase {
 			'block_id' => $iBlockId,
 			'module_id' => $iModuleId
 		);
-		$actual = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$aAds = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$actual = count($aAds) > 0 ? $aAds[0]['ad_id'] : false;
+
 		$this->assertEquals($expected, $actual);
 	}
 

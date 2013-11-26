@@ -23,6 +23,7 @@ class Socialad_Test extends PHPUnit_Framework_TestCase {
 
 	public function tearDown()
 	{
+		Phpfox::getService('unittest.test.socialad')->truncateAllRelatedTables();
 	}
 
 }

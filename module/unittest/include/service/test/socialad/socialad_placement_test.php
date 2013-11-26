@@ -102,9 +102,7 @@ class Socialad_Placement_Test extends PHPUnit_Framework_TestCase {
 		//to remove ads at tear off
 		Phpfox::getService('unittest.test.socialad')->insertTestAd($aAdVals);
 
-		$expected = array(
-			$aAdVals['ad_id']
-		);
+		$expected = $aAdVals['ad_id'];
 
 		$iUserId = Phpfox::getService('unittest.test.socialad')->getTestUserId();
 		$iBlockId = 5;
@@ -114,7 +112,9 @@ class Socialad_Placement_Test extends PHPUnit_Framework_TestCase {
 			'block_id' => $iBlockId,
 			'module_id' => $iModuleId
 		);
-		$actual = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$aAds = Phpfox::getService('socialad.ad')->getToDisplayOnBlock($aQuery);
+		$actual = count($aAds) > 0 ? $aAds[0]['ad_id'] : false;
+
 		$this->assertEquals($expected, $actual);
 
 	}

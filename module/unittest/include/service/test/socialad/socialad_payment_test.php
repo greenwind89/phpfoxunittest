@@ -50,9 +50,8 @@ class Socialad_Payment_Test extends PHPUnit_Framework_TestCase {
 			'package_name' => 'Test',
 			'package_description' => 'Test des',
 			'package_price' => 100,
-			'package_click' => 100,
-			'package_impression' => 100,
-			'package_day' => 100,
+			'package_benefit_number' => 100,
+			'package_benefit_type_id' => Phpfox::getService('socialad.helper')->getConst('package.benefit.click', 'id'),
 			'package_currency' => 'USD',
 			'package_last_edited_time' => PHPFOX_TIME, 
 			'package_is_active' => 1,
@@ -84,9 +83,8 @@ class Socialad_Payment_Test extends PHPUnit_Framework_TestCase {
 			'package_name' => 'Test',
 			'package_description' => 'Test des',
 			'package_price' => 100,
-			'package_click' => 100,
-			'package_impression' => 100,
-			'package_day' => 100,
+			'package_benefit_number' => 100,
+			'package_benefit_type_id' => Phpfox::getService('socialad.helper')->getConst('package.benefit.click', 'id'),
 			'package_currency' => 'USD',
 			'package_last_edited_time' => PHPFOX_TIME, 
 			'package_is_active' => 1,
@@ -125,9 +123,8 @@ class Socialad_Payment_Test extends PHPUnit_Framework_TestCase {
 			'package_name' => 'Test',
 			'package_description' => 'Test des',
 			'package_price' => 100,
-			'package_click' => 100,
-			'package_impression' => 100,
-			'package_day' => 100,
+			'package_benefit_number' => 100,
+			'package_benefit_type_id' => Phpfox::getService('socialad.helper')->getConst('package.benefit.click', 'id'),
 			'package_currency' => 'USD',
 			'package_last_edited_time' => PHPFOX_TIME, 
 			'package_is_active' => 1,
@@ -168,4 +165,3 @@ class Socialad_Payment_Test extends PHPUnit_Framework_TestCase {
 
 }
 
-?>

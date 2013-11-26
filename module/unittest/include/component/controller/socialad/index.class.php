@@ -26,7 +26,7 @@ class Unittest_Component_Controller_Socialad_Index extends Phpfox_Component
 	{
 		$aVals = $this->request()->getArray('val');
 
-		$this->testInstall();
+		// $this->testInstall();
 
 		if($aVals) {
 			Phpfox::getService('unittest.test.socialad')->test($aVals['test_suite']);

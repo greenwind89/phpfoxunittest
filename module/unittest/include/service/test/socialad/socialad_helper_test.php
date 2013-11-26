@@ -27,7 +27,7 @@ class Socialad_Helper_Test extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($expect, $actual);
 
 		$expect = 5;
-		$actual = Phpfox::getService('socialad.helper')->getConst('transaction.status.failed', 'id');
+		$actual = Phpfox::getService('socialad.helper')->getConst('transaction.status.canceled', 'id');
 		$this->assertEquals($expect, $actual);
 	}	
 
@@ -40,8 +40,8 @@ class Socialad_Helper_Test extends PHPUnit_Framework_TestCase {
 		$actual = Phpfox::getService('socialad.helper')->getConst('transaction.status.expired', 'phrase');
 		$this->assertEquals($expect, $actual);
 
-		$expect = 'Failed';
-		$actual = Phpfox::getService('socialad.helper')->getConst('transaction.status.failed', 'phrase');
+		$expect = 'Canceled';
+		$actual = Phpfox::getService('socialad.helper')->getConst('transaction.status.canceled', 'phrase');
 		$this->assertEquals($expect, $actual);
 	}	
 
@@ -51,6 +51,19 @@ class Socialad_Helper_Test extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($expect, $actual);
 	}	
 
+	public function testGetBenefitTypeId() {
+		$expect = 1;
+		$actual = Phpfox::getService('socialad.helper')->getConst('package.benefit.click', 'id');
+		$this->assertEquals($expect, $actual);
+
+		$expect = 2;
+		$actual = Phpfox::getService('socialad.helper')->getConst('package.benefit.impression', 'id');
+		$this->assertEquals($expect, $actual);
+
+		$expect = 3;
+		$actual = Phpfox::getService('socialad.helper')->getConst('package.benefit.day', 'id');
+		$this->assertEquals($expect, $actual);
+	}	
 	public function tearDown()
 	{
 	}

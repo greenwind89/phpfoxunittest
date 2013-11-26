@@ -11,6 +11,7 @@ require_once "socialad_package_test.php";
 require_once "socialad_create_edit_ad_test.php";
 require_once "socialad_payment_test.php";
 require_once "socialad_helper_test.php";
+require_once "socialad_permission_test.php";
 
 class Unittest_Service_Test_SocialAd_SocialAd extends Phpfox_Service {
 
@@ -48,6 +49,10 @@ class Unittest_Service_Test_SocialAd_SocialAd extends Phpfox_Service {
 				 'description' => 'Test Helper functions'
 			 ), 
 
+			 array( 
+				 'id' => 'socialad_permission_test',
+				 'description' => 'Test Permission Functions'
+			 ), 
 
 		 );
 	}
@@ -60,12 +65,17 @@ class Unittest_Service_Test_SocialAd_SocialAd extends Phpfox_Service {
 		// TRUNCATE related tables 
 		$aTable = array(
 			Phpfox::getT('socialad_ad'),
+			Phpfox::getT('socialad_ad_track'),
 			Phpfox::getT('socialad_image'),
 			Phpfox::getT('socialad_ad_audience_user_group'),
 			Phpfox::getT('socialad_ad_audience_location'),
 			Phpfox::getT('socialad_ad_audience_language'),
 			Phpfox::getT('socialad_transaction'),
-			Phpfox::getT('socialad_package')
+			Phpfox::getT('socialad_package'),
+			Phpfox::getT('socialad_ad_statistic'),
+			Phpfox::getT('socialad_ad_track'),
+			Phpfox::getT('socialad_campaign'),
+
 		);
 
 		foreach($aTable as $sTable) {
@@ -129,6 +139,24 @@ class Unittest_Service_Test_SocialAd_SocialAd extends Phpfox_Service {
 		$this->database()->delete(Phpfox::getT('user'), 'user_id = ' . $this->_iTestUserId);
 
 	}
+
+	public function updateAdStatus($iAdId, $iStatus) {
+
+		$this->database()->update(Phpfox::getT('socialad_ad'), array('ad_status' => $iStatus), 'ad_id = '. $iAdId);
+	}
+
+	public function insertTestCampaign($aVals) {
+		$aInsert = array_merge(array(
+			'campaign_name' => 'test campaign',
+			'campaign_status' => 1,
+			'campaign_user_id' => 1,
+			'campaign_timestamp' => PHPFOX_TIME
+		), $aVals);
+
+		$iId = $this->database()->insert(Phpfox::getT('socialad_campaign'), $aInsert);
+		return $iId;
+	}
+
 	public function insertTestUser($aVals) {
 
 
@@ -218,6 +246,8 @@ class Unittest_Service_Test_SocialAd_SocialAd extends Phpfox_Service {
 			'audience_gender' => 0,
 			'audience_age_max' => 10000,
 			'placement_block_id' => 3,
+			'ad_status' => 5,
+			'ad_user_id' => 1
 		), $aVals);
 
 		$iAdId = $this->database()->insert(Phpfox::getT('socialad_ad'), $aInsert);
@@ -229,4 +259,100 @@ class Unittest_Service_Test_SocialAd_SocialAd extends Phpfox_Service {
 		$this->database()->delete(Phpfox::getT('socialad_ad'), 'ad_id = ' . $iAdId);
 	}
 
+	public function insertTestPackage($aVals) {
+
+		$aInsert = array_merge(array(
+			'package_name' => 'Test',
+			'package_description' => 'Test des',
+			'package_price' => 100,
+			'package_click' => 100,
+			'package_impression' => 100,
+			'package_day' => 100,
+			'package_currency' => 'USD',
+			'package_last_edited_time' => PHPFOX_TIME, 
+			'package_is_active' => 1,
+			'package_benefit_type_id' => 1,
+		), $aVals);
+
+		$iAdId = $this->database()->insert(Phpfox::getT('socialad_package'), $aInsert);
+
+		return $iPackageId;
+	}
+
+	public function getAdFormData() {
+		$aData = array( 
+			 "image_path" => "2013/10/39fa9be47fbd8cc8f9e6d7e7e1a540d3.jpg" ,
+			 "ad_package_id" => "1" ,
+			 "ad_id" => "" ,
+			 "ad_item_type" => "4" ,
+			 "ad_item_id" => "3" ,
+			 "ad_external_url" => "" ,
+			 "ad_type" => "2" ,
+			 "ad_title" => "test 2" ,
+			 "ad_text" => "dfgsgd" ,
+			 "campaign_id" => "2" ,
+			 "campaign_name" => "" ,
+			 "is_continuous" => "0" ,
+			 "ad_expect_start_time_month" => "10" ,
+			 "ad_expect_start_time_day" => "24" ,
+			 "ad_expect_start_time_year" => "2013" ,
+			 "ad_expect_start_time_hour" => "04" ,
+			 "ad_expect_start_time_minute" => "24" ,
+			 "ad_expect_end_time_month" => "10" ,
+			 "ad_expect_end_time_day" => "31" ,
+			 "ad_expect_end_time_year" => "2013" ,
+			 "ad_expect_end_time_hour" => "04" ,
+			 "ad_expect_end_time_minute" => "24" ,
+			 "placement_module_id" => array (
+				 0 => "admincp" ) ,
+			 "placement_block_id" => "1" ,
+			 "audience_location" => array( 
+			 0 => "AE" ) ,
+			 "audience_gender" => "1" ,
+			 "audience_age_min" => "17" ,
+			 "audience_age_max" => "18",
+			 "ad_number_of_package" => 1
+		);
+
+		return $aData;
+	}
+
+	private $_bNeedApprove = false;
+
+	public function getNeedApprove() {
+		return $this->_bNeedApprove;
+	}
+	public function setNeedApprove($value) {
+		$this->_bNeedApprove = $value;
+	}
+
+	private $_bIsAdmin = false;
+
+	public function getIsAdmin() {
+		return $this->_bIsAdmin;
+	}
+
+	public function setIsAdmin($value) {
+		$this->_bIsAdmin = $value;
+	}
+
+	private $_iUserId = false;
+
+	public function getUserId() {
+		return $this->_iUserId;
+	}
+
+	public function setUserId($value) {
+		$this->_iUserId = $value;
+	}
+
+	private $_bCanDenyApprove = false;
+
+	public function getCanDenyApproveAd() {
+		return $this->_bCanDenyApprove;
+	}
+
+	public function setCanDenyApproveAd($value) {
+		$this->_bCanDenyApprove = $value;
+	}
 }

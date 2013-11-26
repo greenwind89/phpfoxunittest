@@ -22,12 +22,12 @@ class Socialad_Package_Test extends PHPUnit_Framework_TestCase {
 			'package_name' => 'Test',
 			'package_description' => 'Test des',
 			'package_price' => 100,
-			'package_click' => 100,
-			'package_impression' => 100,
-			'package_day' => 100,
+			'package_benefit_number' => 100,
+			'package_benefit_type_id' => Phpfox::getService('socialad.helper')->getConst('package.benefit.click', 'id'),
 			'package_currency' => 'USD',
 			'package_last_edited_time' => PHPFOX_TIME, 
 			'package_is_active' => 1,
+			'package_is_free' => 1,
 		);
 
 		$expect = 0; // expect greater than 0 
@@ -40,6 +40,8 @@ class Socialad_Package_Test extends PHPUnit_Framework_TestCase {
 
 		$this->assertFalse(!$aPackage);
 		$this->assertEquals(1, $aPackage['package_is_active']);
+		$this->assertEquals(Phpfox::getService('socialad.helper')->getConst('package.benefit.click'), $aPackage['package_benefit_type_id']);
+		$this->assertEquals(1, $aPackage['package_is_free']);
 
 	}
 
@@ -48,9 +50,8 @@ class Socialad_Package_Test extends PHPUnit_Framework_TestCase {
 			'package_name' => 'Test',
 			'package_description' => 'Test des',
 			'package_price' => 100,
-			'package_click' => 100,
-			'package_impression' => 100,
-			'package_day' => 100,
+			'package_benefit_number' => 100,
+			'package_benefit_type_id' => Phpfox::getService('socialad.helper')->getConst('package.benefit.click', 'id'),
 			'package_currency' => 'USD',
 			'package_last_edited_time' => PHPFOX_TIME, 
 			'package_is_active' => 1,
@@ -72,9 +73,8 @@ class Socialad_Package_Test extends PHPUnit_Framework_TestCase {
 			'package_name' => 'Test',
 			'package_description' => 'Test des',
 			'package_price' => 100,
-			'package_click' => 100,
-			'package_impression' => 100,
-			'package_day' => 100,
+			'package_benefit_number' => 100,
+			'package_benefit_type_id' => Phpfox::getService('socialad.helper')->getConst('package.benefit.click', 'id'),
 			'package_currency' => 'USD',
 			'package_last_edited_time' => PHPFOX_TIME, 
 			'package_is_active' => 1,
@@ -95,10 +95,9 @@ class Socialad_Package_Test extends PHPUnit_Framework_TestCase {
 		$aPackageVals = array(
 			'package_name' => 'Test',
 			'package_description' => 'Test des',
+			'package_benefit_number' => 100,
 			'package_price' => 100,
-			'package_click' => 100,
-			'package_impression' => 100,
-			'package_day' => 100,
+			'package_benefit_type_id' => Phpfox::getService('socialad.helper')->getConst('package.benefit.click', 'id'),
 			'package_currency' => 'USD',
 			'package_last_edited_time' => PHPFOX_TIME, 
 			'package_is_active' => 1,
@@ -121,11 +120,10 @@ class Socialad_Package_Test extends PHPUnit_Framework_TestCase {
 		$aPackageVals = array(
 			'package_id' => $iPackageId, // add package_id to make it become edit
 			'package_name' => 'Test',
-			'package_description' => 'Test des',
 			'package_price' => 100,
-			'package_click' => 100,
-			'package_impression' => 100,
-			'package_day' => 100,
+			'package_description' => 'Test des',
+			'package_benefit_number' => 100,
+			'package_benefit_type_id' => Phpfox::getService('socialad.helper')->getConst('package.benefit.click', 'id'),
 			'package_currency' => 'USD',
 			'package_last_edited_time' => PHPFOX_TIME, 
 			'package_is_active' => 1,
@@ -146,9 +144,8 @@ class Socialad_Package_Test extends PHPUnit_Framework_TestCase {
 			'package_name' => 'Test',
 			'package_description' => 'Test des',
 			'package_price' => 100,
-			'package_click' => 100,
-			'package_impression' => 100,
-			'package_day' => 100,
+			'package_benefit_number' => 100,
+			'package_benefit_type_id' => Phpfox::getService('socialad.helper')->getConst('package.benefit.click', 'id'),
 			'package_currency' => 'USD',
 			'package_last_edited_time' => PHPFOX_TIME, 
 			'package_is_active' => 1,
@@ -170,9 +167,8 @@ class Socialad_Package_Test extends PHPUnit_Framework_TestCase {
 			'package_name' => 'Test',
 			'package_description' => 'Test des',
 			'package_price' => 100,
-			'package_click' => 100,
-			'package_impression' => 100,
-			'package_day' => 100,
+			'package_benefit_number' => 100,
+			'package_benefit_type_id' => Phpfox::getService('socialad.helper')->getConst('package.benefit.click', 'id'),
 			'package_currency' => 'USD',
 			'package_last_edited_time' => PHPFOX_TIME, 
 			'package_is_active' => 1,
@@ -194,9 +190,8 @@ class Socialad_Package_Test extends PHPUnit_Framework_TestCase {
 			'package_name' => 'Test',
 			'package_description' => 'Test des',
 			'package_price' => 100,
-			'package_click' => 100,
-			'package_impression' => 100,
-			'package_day' => 100,
+			'package_benefit_number' => 100,
+			'package_benefit_type_id' => Phpfox::getService('socialad.helper')->getConst('package.benefit.click', 'id'),
 			'package_currency' => 'USD',
 			'package_last_edited_time' => PHPFOX_TIME, 
 			'package_is_active' => 1,
@@ -220,9 +215,8 @@ class Socialad_Package_Test extends PHPUnit_Framework_TestCase {
 			'package_name' => 'Test',
 			'package_description' => 'Test des',
 			'package_price' => 100,
-			'package_click' => 100,
-			'package_impression' => 100,
-			'package_day' => 100,
+			'package_benefit_number' => 100,
+			'package_benefit_type_id' => Phpfox::getService('socialad.helper')->getConst('package.benefit.click', 'id'),
 			'package_currency' => 'USD',
 			'package_last_edited_time' => PHPFOX_TIME, 
 			'package_is_active' => 1,
@@ -235,7 +229,28 @@ class Socialad_Package_Test extends PHPUnit_Framework_TestCase {
 
 		$aAdTypes = Phpfox::getService('socialad.package')->getAdTypesOfPackage($iPackageId);
 
-		$this->assertEquals(1, $aAdTypes[1]['id']);
+		$this->assertEquals(1, $aAdTypes[0]['id']);
+	}	
+
+	public function testCreateUnlimitedPackage() {
+		// Create a package
+
+		$aPackageVals = array(
+			'package_is_unlimited' => 1, // This is bad, inferred from layout form
+			'package_name' => 'Test',
+			'package_description' => 'Test des',
+			'package_price' => 100,
+			'package_benefit_number' => 100,
+			'package_benefit_type_id' => Phpfox::getService('socialad.helper')->getConst('package.benefit.click', 'id'),
+			'package_currency' => 'USD',
+			'package_last_edited_time' => PHPFOX_TIME, 
+			'package_is_active' => 1,
+		);
+
+		$iPackageId = Phpfox::getService('socialad.package.process')->handleSubmitForm($aPackageVals);
+
+		$aPackage = Phpfox::getService('socialad.package')->getPackageById($iPackageId);
+		$this->assertEquals(1, $aPackage['package_is_unlimited']);
 	}	
 
 	public function tearDown()

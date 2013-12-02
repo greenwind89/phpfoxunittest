@@ -4,6 +4,7 @@ require_once 'PHPUnit/Autoload.php';
 require_once 'PHPUnit/Framework/TestCase.php';                                                                                          
 require_once "PHPUnit/TextUI/TestRunner.php";                                                                                           
 require_once "PHPUnit/Framework/TestSuite.php";                                                                                         
+require_once dirname(dirname(dirname(__FILE__))) . "/helper/WebDriverDevelop.php";
 require_once "socialad_testcase.php";
 require_once "socialad_audience_test.php";
 require_once "socialad_placement_test.php";
@@ -12,6 +13,9 @@ require_once "socialad_create_edit_ad_test.php";
 require_once "socialad_payment_test.php";
 require_once "socialad_helper_test.php";
 require_once "socialad_permission_test.php";
+require_once "socialad_hide_ads_test.php";
+
+require_once dirname(dirname(dirname(__FILE__))) . "/lib/webdriver/__init__.php";
 
 class Unittest_Service_Test_SocialAd_SocialAd extends Phpfox_Service {
 
@@ -52,6 +56,10 @@ class Unittest_Service_Test_SocialAd_SocialAd extends Phpfox_Service {
 			 array( 
 				 'id' => 'socialad_permission_test',
 				 'description' => 'Test Permission Functions'
+			 ), 
+			 array( 
+				 'id' => 'socialad_hide_ads_test',
+				 'description' => 'Test Hide Ads UI'
 			 ), 
 
 		 );

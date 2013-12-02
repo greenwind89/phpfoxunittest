@@ -478,6 +478,38 @@ class Socialad_Permission_Test extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($expect, $actual);
 	}
 
+	public function testCanViewCampaignDetail() {
+
+		$aCampaignVal = array(
+			'campaign_user_id' => 1111,
+			'campaign_status' => Phpfox::getService('socialad.helper')->getConst('campaign.status.active')
+		);
+		$iCampaignId = Phpfox::getService('unittest.test.socialad')->insertTestCampaign($aCampaignVal);
+
+		$expect = false;
+		Phpfox::getService('unittest.test.socialad')->setUserId(1);
+		$actual = Phpfox::getService('socialad.permission')->canViewDetailAd($iCampaignId);
+		$this->assertEquals($expect, $actual);
+
+
+		$expect = true;
+		Phpfox::getService('unittest.test.socialad')->setUserId($aCampaignVal['campaign_user_id']);
+		$actual = Phpfox::getService('socialad.permission')->canEditCampaign($iCampaignId);
+		$this->assertEquals($expect, $actual);
+
+		// dleted campaign
+		$aCampaignVal = array(
+			'campaign_user_id' => 1111,
+			'campaign_status' => Phpfox::getService('socialad.helper')->getConst('campaign.status.deleted')
+		);
+		$iCampaignId = Phpfox::getService('unittest.test.socialad')->insertTestCampaign($aCampaignVal);
+
+		$expect = false;
+		Phpfox::getService('unittest.test.socialad')->setUserId($aCampaignVal['campaign_user_id']);
+		$actual = Phpfox::getService('socialad.permission')->canEditCampaign($iCampaignId);
+		$this->assertEquals($expect, $actual);
+	}
+
 	public function tearDown() {
 		Phpfox::getService('unittest.test.socialad')->truncateAllRelatedTables();
 	}

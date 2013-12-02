@@ -25,6 +25,7 @@ class Unittest_Component_Controller_Socialad_Index extends Phpfox_Component
 	public function process()
 	{
 		$aVals = $this->request()->getArray('val');
+		$this->testInstall();
 
 		// $this->testInstall();
 
